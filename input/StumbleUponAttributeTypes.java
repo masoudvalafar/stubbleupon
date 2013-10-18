@@ -2,6 +2,8 @@ package input;
 
 import java.util.ArrayList;
 
+import tools.ParsingTools;
+
 public class StumbleUponAttributeTypes implements AttributeTypes {
 
 	ArrayList<Class<?>> attributeTypes = new ArrayList<Class<?>>();
@@ -38,15 +40,21 @@ public class StumbleUponAttributeTypes implements AttributeTypes {
 	
 	@Override
 	public Object convert(int count, String input) {
-		;
 		
-		if (attributeTypes.get(count) == Integer.TYPE) {
-			return Integer.parseInt(input);
+		if (input.equals("?")) {
+			return null;
+		} else if (attributeTypes.get(count) == Integer.TYPE) {
+			return Integer.parseInt(ParsingTools.strip(input));
 		} else if (attributeTypes.get(count) == Double.TYPE) {
-			return Double.parseDouble(input);
+			return Double.parseDouble(ParsingTools.strip(input));
 		} else {
 			return input;
 		}
+	}
+
+	@Override
+	public Class<?> getType(int index) {
+		return attributeTypes.get(index);
 	}
 
 }

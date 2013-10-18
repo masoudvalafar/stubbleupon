@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import tools.ParsingTools;
+
 public class TSVParser implements Parser {
 	
 	private static final String DELIM = "\t";
@@ -23,7 +25,7 @@ public class TSVParser implements Parser {
 		
 		StringTokenizer st = new StringTokenizer(line, DELIM);
 		while (st.hasMoreTokens()) {
-			columns.add(st.nextToken());
+			columns.add(ParsingTools.strip(st.nextToken()));
 		}
 		
 		while (true) {
@@ -39,7 +41,7 @@ public class TSVParser implements Parser {
 			st = new StringTokenizer(line, DELIM);
 			ArrayList<String> instance = new ArrayList<String>();
 			while (st.hasMoreTokens()) {
-				instance.add(st.nextToken());
+				instance.add(ParsingTools.strip(st.nextToken()));
 			}
 			instances.add(instance);
 		}

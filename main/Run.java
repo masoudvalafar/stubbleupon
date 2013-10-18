@@ -1,6 +1,8 @@
 package main;
 
+import input.AttributeTypes;
 import input.InputParser;
+import input.StumbleUponAttributeTypes;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -29,10 +31,13 @@ public class Run {
 		}
 		
 		ArrayList<String> columns = inputParser.getColumns();
-		ArrayList<ArrayList<String>> instances = inputParser.getInstances();
+		
+		AttributeTypes stumbleUponAttrtypes = new StumbleUponAttributeTypes();
+		ArrayList<ArrayList<Object>> formattedInstances = inputParser.getFormattedInstances(stumbleUponAttrtypes);
 		
 		System.out.println(columns.size());
-		System.out.println(instances.size());
+		System.out.println(formattedInstances.size());
+		
 	}
 
 }
