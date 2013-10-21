@@ -41,7 +41,7 @@ public class TSVParser implements Parser {
 			st = new StringTokenizer(line, DELIM);
 			ArrayList<String> instance = new ArrayList<String>();
 			while (st.hasMoreTokens()) {
-				instance.add(ParsingTools.strip(st.nextToken()));
+				instance.add(st.nextToken());
 			}
 			instances.add(instance);
 		}

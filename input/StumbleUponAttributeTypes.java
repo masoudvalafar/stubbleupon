@@ -2,6 +2,10 @@ package input;
 
 import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONValue;
+import org.json.simple.parser.ParseException;
+
 import tools.ParsingTools;
 
 public class StumbleUponAttributeTypes implements AttributeTypes {
@@ -11,7 +15,7 @@ public class StumbleUponAttributeTypes implements AttributeTypes {
 	public StumbleUponAttributeTypes() {
 		attributeTypes.add(String.class); // url
 		attributeTypes.add(Integer.TYPE); // urlid
-		attributeTypes.add(String.class); // boilerplate
+		attributeTypes.add(JSONArray.class); // boilerplate
 		attributeTypes.add(String.class); // alchemy category
 		attributeTypes.add(Double.TYPE);  // alchemy  category score
 		attributeTypes.add(Double.TYPE);  // average number of words in each link
@@ -41,8 +45,10 @@ public class StumbleUponAttributeTypes implements AttributeTypes {
 	@Override
 	public Object convert(int count, String input) {
 		
-		if (input.equals("?")) {
+		if (input.equals("\"?\"")) {
 			return null;
+		} else if (attributeTypes.get(count) == JSONArray.class) {
+			return JSONValue.parse(JSONValue.toJSONString(input));
 		} else if (attributeTypes.get(count) == Integer.TYPE) {
 			return Integer.parseInt(ParsingTools.strip(input));
 		} else if (attributeTypes.get(count) == Double.TYPE) {
