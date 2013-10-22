@@ -14,7 +14,7 @@ public class StumbleUponAttributeTypes implements AttributeTypes {
 	public StumbleUponAttributeTypes() {
 		attributeTypes.add(String.class); // url
 		attributeTypes.add(Integer.TYPE); // urlid
-		attributeTypes.add(Gson.class); // boilerplate
+		attributeTypes.add(Gson.class);   // boilerplate
 		attributeTypes.add(String.class); // alchemy category
 		attributeTypes.add(Double.TYPE);  // alchemy  category score
 		attributeTypes.add(Double.TYPE);  // average number of words in each link
