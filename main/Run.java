@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Run {
 
@@ -36,7 +37,7 @@ public class Run {
 		ArrayList<ArrayList<Object>> formattedInstances = inputParser.getFormattedInstances(stumbleUponAttrtypes);
 		
 		System.out.println(columns.size());
-		System.out.println(formattedInstances.get(2).get(2));
+		System.out.println( ((Map<String,String>) formattedInstances.get(0).get(2)).get("body") );
 		
 	}
 

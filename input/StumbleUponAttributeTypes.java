@@ -1,12 +1,11 @@
 package input;
 
 import java.util.ArrayList;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.ParseException;
+import java.util.Map;
 
 import tools.ParsingTools;
+
+import com.google.gson.Gson;
 
 public class StumbleUponAttributeTypes implements AttributeTypes {
 
@@ -15,7 +14,7 @@ public class StumbleUponAttributeTypes implements AttributeTypes {
 	public StumbleUponAttributeTypes() {
 		attributeTypes.add(String.class); // url
 		attributeTypes.add(Integer.TYPE); // urlid
-		attributeTypes.add(JSONArray.class); // boilerplate
+		attributeTypes.add(Gson.class); // boilerplate
 		attributeTypes.add(String.class); // alchemy category
 		attributeTypes.add(Double.TYPE);  // alchemy  category score
 		attributeTypes.add(Double.TYPE);  // average number of words in each link
@@ -47,8 +46,10 @@ public class StumbleUponAttributeTypes implements AttributeTypes {
 		
 		if (input.equals("\"?\"")) {
 			return null;
-		} else if (attributeTypes.get(count) == JSONArray.class) {
-			return JSONValue.parse(JSONValue.toJSONString(input));
+		} else if (attributeTypes.get(count) == Gson.class) {
+			Gson gson=new Gson(); 
+			Map<String,String> map = (Map<String,String>) gson.fromJson(ParsingTools.strip(input.replaceAll("\"\"", "\"")), Map.class);
+			return map; 
 		} else if (attributeTypes.get(count) == Integer.TYPE) {
 			return Integer.parseInt(ParsingTools.strip(input));
 		} else if (attributeTypes.get(count) == Double.TYPE) {
